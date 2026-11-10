@@ -1,0 +1,10 @@
+# Ambientes virtuais e cache
+__pycache__/
+*.pyc
+.env
+
+# Bancos de dados locais
+*.db
+
+# Configurações do editor
+.vscode/
