@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lista de Tarefas</title>
+
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            width: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 8px;
+            width: 250px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        li {
+            margin: 8px 0;
+            font-size: 18px;
+        }
+         
+        a {
+            text-decoration: none;
+            margin-right: 8px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📝 Lista de Tarefas</h1>
+
+    <form action="/adicionar">
+
+        <input
+            type="text"
+            name="titulo"
+            placeholder="Digite uma tarefa">
+
+        <br><br>
+
+        <select name="prioridade">
+
+            <option value="alta">
+                🔴 Alta
+            </option>
+
+            <option value="media">
+                🟡 Média
+            </option>
+
+            <option value="baixa">
+                🟢 Baixa
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <input
+            type="date"
+            name="data_limite">
+
+        <br><br>
+
+        <button type="submit">
+            Adicionar
+            </button>
+
+    </form>
+    <ul>
+
+        {% for tarefa in tarefas %}
+
+        <li>
+
+            {% if tarefa[2] %}
+
+                ✅ <s>{{ tarefa[1] }}</s>
+
+            {% else %}
+
+                <a href="/concluir/{{ tarefa[0] }}">
+                    ✅
+                </a>
+
+                {{ tarefa[1] }}
+
+            {% endif %}
+
+            <br>
+
+            📅 {{ tarefa [4] }}
+
+            <br>
+
+        {% if tarefa[3] == "alta" %}
+            
+            <span style="color:red;">
+                🔴 Alta
+            </span>
+
+        {% elif tarefa[3] == "media" %}
+
+            <span style="color:orange;">
+                🟡 Média
+            </span>"
+
+        {% elif tarefa[3] == "baixa" %}
+
+            <span style="color:green;">
+                🟢 Baixa
+            </span>
+
+        {% else%}
+
+            <span>
+                ⚪ Sem prioridade
+            </span>
+
+        {% endif %}
+
+
+            <br>
+
+            <a href="/remover/{{ tarefa[0] }}">
+                ❌
+            </a>
+
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+</body>
+
+</html>
